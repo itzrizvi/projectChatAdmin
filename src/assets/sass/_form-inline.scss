@@ -1,0 +1,15 @@
+.form-inline {
+    @apply flex items-center;
+    @include media-breakpoint-down(sm) {
+        @apply block;
+    }
+    .form-label {
+        @apply mb-0 mr-5 text-right;
+        @include media-breakpoint-down(sm) {
+            @apply mb-2 mr-0 text-left;
+        }
+    }
+    .form-control {
+        @apply flex-1;
+    }
+}

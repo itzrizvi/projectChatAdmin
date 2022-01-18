@@ -1,0 +1,30 @@
+// Default Form Control
+.form-control {
+    @apply w-full border shadow-sm py-2 px-3 rounded-md appearance-none placeholder-gray-500;
+    &:focus {
+        @apply outline-none ring;
+    }
+    &:disabled,
+    &[readonly] {
+        @apply bg-gray-100 cursor-not-allowed;
+    }
+}
+
+// Default Sizes
+.form-control-sm {
+    @apply text-xs py-1.5 px-2;
+}
+.form-control-lg {
+    @apply text-lg py-1.5 px-4;
+}
+
+// Form Control Rounded
+.form-control-rounded {
+    @apply rounded-full;
+}
+
+.dark {
+    .form-control {
+        @apply bg-dark-2 border-transparent;
+    }
+}

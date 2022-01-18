@@ -1,0 +1,48 @@
+.card-body {
+  border-top: 1px solid #ebebebf1 !important;
+}
+
+.support-tag-1 {
+  color: rgb(48, 71, 236);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.card-body h5 {
+  color: #000000;
+  font-family: "Titillium Web";
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card-body img {
+  width: 60px;
+  margin: auto;
+  display: block;
+}
+
+img.card-img-top {
+  padding: 14px 20px 24px 20px;
+  cursor: pointer;
+}
+
+.chat-front-sec4 {
+  width: 91%;
+  margin: auto !important;
+  background-color: #ffffff;
+  padding: 12px 0px;
+  margin-bottom: 17px !important;
+  box-shadow: rgb(0 0 0 / 10%) 0px 4px 15px 0px,
+    rgb(0 0 0 / 10%) 0px 1px 2px 0px, rgb(48 71 236 / 50%) 0px 2px 0px 0px inset;
+}
+
+.custom-card {
+  padding: 20px;
+  line-height: 23px;
+  font-family: "Titillium Web";
+  cursor: pointer;
+}
+
+.custom-card p {
+  color: rgb(115, 115, 118);
+}

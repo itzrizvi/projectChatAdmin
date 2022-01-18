@@ -1,0 +1,33 @@
+// Default Form Select
+.form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgb(74, 85, 104)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-chevron-down'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-size: 18px;
+    background-position: center right 0.6rem;
+    @apply w-full border shadow-sm py-2 px-3 pr-8 rounded-md appearance-none placeholder-gray-500 bg-no-repeat;
+    &:focus {
+        @apply outline-none ring;
+    }
+    &:disabled,
+    &[readonly] {
+        @apply bg-gray-100 cursor-not-allowed;
+    }
+}
+
+// Default Sizes
+.form-select-sm {
+    @apply text-xs py-1.5 pl-2 pr-8;
+}
+.form-select-lg {
+    @apply text-lg py-1.5 pl-4 pr-8;
+}
+
+// Form Select Rounded
+.form-select-rounded {
+    @apply rounded-full;
+}
+
+.dark {
+    .form-select {
+        @apply bg-dark-2 border-transparent;
+    }
+}

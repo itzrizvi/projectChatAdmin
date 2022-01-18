@@ -1,0 +1,12 @@
+.notification-dropdown {
+    .notification-dropdown__content {
+        width: 350px;
+        margin-top: 70px;
+        @include media-breakpoint-down(sm) {
+            width: 280px;
+        }
+        .box {
+            box-shadow: 0px 3px 15px #00000012;
+        }
+    }
+}

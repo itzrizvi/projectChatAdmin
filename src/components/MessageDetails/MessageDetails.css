@@ -1,0 +1,242 @@
+/* popup style  */
+.chat-popup-content {
+  background: white;
+  width: 100%;
+  border: none;
+  z-index: -2;
+  padding: 0;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+.chat-popup-arrow {
+  color: rgb(255, 255, 255);
+}
+[role="tooltip"].chat-popup-content {
+  padding: 0; /* height: 850px;it need to change for viewport  */
+  width: 400px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+}
+
+.chat-popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+[data-chat-popup="tooltip"].chat-popup-overlay {
+  background: transparent;
+
+  border-radius: 0px;
+}
+
+/* .decoration{
+ position: absolute;
+      background-image: linear-gradient(50deg, rgb(74, 83, 204), rgb(37, 68, 241));
+      height: 12%;
+      width: 100%;
+      z-index: -2;
+  }  */
+
+/* .headline{
+  margin-top: -120px; 
+  position: relative
+}
+
+
+.message-part{
+  
+  margin-top: -120px; 
+  position: relative
+}
+
+
+.search-part{
+  margin-top: -120px; 
+  position: relative
+}
+
+.status-part{
+  margin-top: -120px; 
+  position: relative
+} 
+
+.support-part{
+  margin-top: -120px; 
+  position: relative
+}  
+.new-intercom{
+  margin-top: -120px; 
+  position: relative
+} */
+
+.msdDetailImg {
+  background-position: top;
+  background-repeat: no-repeat;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding-bottom: 5px;
+  background: linear-gradient(
+    135deg,
+    rgb(48, 71, 236) 0%,
+    rgb(15, 34, 167) 100%
+  );
+}
+
+.msdDetailImg p {
+  color: #ffffff9e;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Titillium Web";
+}
+
+p.usual-reply-1 {
+  margin: 0;
+}
+
+.bd-highlight h4 {
+  font-family: "Titillium Web";
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.backBtn:hover {
+  background-color: rgba(0, 0, 0, 0.486);
+}
+
+.messegin-input {
+  border: none;
+  height: 50px;
+  color: rgb(70, 70, 70);
+}
+
+.gifIcon {
+  height: 50px;
+}
+
+.messegin-input:focus {
+  outline: none;
+}
+
+ul.bot-Msg-activitites {
+  list-style: none;
+  width: 95%;
+  text-align: right;
+  padding: 0px 5px 0px 0px;
+  margin: 0;
+}
+
+.bot-msg-initiated {
+  height: 400px;
+}
+
+ul.bot-Msg-activitites li h2 {
+  font-size: 14px;
+  background: linear-gradient(70deg, #000000cc, transparent);
+  padding: 9px;
+  cursor: pointer;
+}
+
+.text-holder.text-white {
+  margin-left: -16px;
+}
+p.usual-reply-2 {
+  color: #ffffff;
+  font-size: 13px;
+  line-height: 30px;
+}
+
+@media screen and (max-width: 375px) {
+  .msdDetailImg {
+    background-image: url("../Image/backgroundImg2.png");
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  #chat-container {
+    height: 590px !important;
+  }
+  #perfect-scroll {
+    height: 50px !important;
+  }
+}
+
+.image1-2 {
+  border-radius: 80px;
+  position: absolute;
+  height: 50px;
+  border: 1px solid rgb(15, 34, 167);
+  top: -45px;
+  display: block;
+  right: -50px;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.image-holder-2 {
+  position: relative;
+  width: 130px;
+  height: 80px;
+}
+.image2-2 {
+  border-radius: 80px;
+  position: absolute;
+  height: 50px;
+  top: 10px;
+  left: 0px;
+  border: 2px solid rgb(15, 34, 167);
+  right: 0px;
+  bottom: 0px;
+  margin: auto;
+}
+
+.image3-2 {
+  border-radius: 80px;
+  position: absolute;
+  height: 50px;
+  top: 10px;
+  left: 84px;
+  border: 2px solid rgb(15, 34, 167);
+  right: 0px;
+  bottom: 0px;
+  margin: auto;
+}
+
+.top-area {
+  display: flex;
+  justify-content: space-around;
+  padding: 26px 8px 20px 8px;
+}
+button.btn.backBtn {
+  border: none;
+  outline: none;
+}
+button.gotoFront {
+  border: none;
+  outline: none;
+  font-size: 17px;
+}
+
+.top-texts h4 {
+  font-family: "Titillium Web";
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.top-texts p {
+  font-family: "Titillium Web";
+  font-size: 14px;
+}
+
+.bottom-area {
+  display: flex;
+  justify-content: space-around;
+}
+
+@media screen and (max-width: 1480px) {
+  .msdDetailImg {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 5px;
+  }
+}

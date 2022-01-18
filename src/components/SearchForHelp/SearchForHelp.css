@@ -1,0 +1,80 @@
+/* .search-btn{
+    border-right: none;
+    border-color: rgb(48, 71, 236);
+    border-radius: ;
+}
+
+
+
+
+.form-style{
+    border-left: none;
+    border-color: rgb(48, 71, 236);
+    height: 50px;
+} */
+
+.search-btn {
+  border: none;
+}
+
+.search-btn:hover {
+  background-color: transparent;
+  color: grey;
+}
+
+.form-style {
+  border: none;
+  border-radius: 30px;
+  width: 253px;
+}
+
+.form-style:focus {
+  outline: none;
+}
+
+.form-full {
+  border: 1px solid rgb(48, 71, 236);
+  border-radius: 26px;
+  width: 99%;
+  margin: auto;
+}
+
+.form-full button svg {
+  color: rgb(48, 71, 236);
+}
+
+.search-for-help h5 {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: "Titillium Web";
+  margin-top: 12px;
+  margin-bottom: 10px;
+}
+
+.search-help-form {
+  width: 100%;
+  margin: auto;
+  position: relative;
+}
+
+.search-help-form input {
+  border: 1px solid rgb(48, 71, 236);
+  border-radius: 20px;
+  outline: none;
+  width: 100%;
+  display: block;
+  margin: auto;
+  padding: 8px 46px;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+button.search-btn {
+  position: absolute;
+  top: 9px;
+  left: 21px;
+  font-size: 12px;
+  color: #a3a3a3;
+  outline: none !important;
+}

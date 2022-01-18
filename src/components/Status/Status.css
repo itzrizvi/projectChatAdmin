@@ -1,0 +1,44 @@
+.check-right-icon {
+  width: 60px;
+}
+
+.check-right-icon img {
+  width: 100%;
+}
+
+.status-tag-1 {
+  margin: 0;
+  font-family: "Titillium Web";
+  color: rgb(48, 71, 236);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 3px;
+  margin-top: 2px;
+}
+
+.status-tag-2 {
+  margin: 0;
+  color: #adadad;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.chat-front-sec3 {
+  width: 91%;
+  margin: auto !important;
+  background-color: #ffffff;
+  padding: 12px 18px;
+  margin-bottom: 17px !important;
+  box-shadow: rgb(0 0 0 / 10%) 0px 4px 15px 0px,
+    rgb(0 0 0 / 10%) 0px 1px 2px 0px, rgb(48 71 236 / 50%) 0px 2px 0px 0px inset;
+}
+
+.bd-highlight {
+  display: flex;
+  justify-content: start;
+}
+
+.bd-highlight img {
+  width: 32px;
+  height: 32px;
+}

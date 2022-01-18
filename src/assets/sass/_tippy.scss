@@ -1,0 +1,46 @@
+.tooltip-content {
+    left: 10000px;
+    @apply fixed;
+}
+.tippy-box {
+    @apply rounded-md;
+    .tippy-content {
+        @apply px-3 py-1.5;
+    }
+}
+.tippy-popper {
+    &[x-placement="left"],
+    &[x-placement="right"],
+    &[x-placement="left-start"],
+    &[x-placement="left-end"],
+    &[x-placement="right-start"],
+    &[x-placement="right-end"] {
+        .tippy-roundarrow,
+        .tippy-arrow {
+            @apply top-0 bottom-0 my-auto;
+        }
+    }
+    &[x-placement="top"],
+    &[x-placement="bottom"],
+    &[x-placement="top-start"],
+    &[x-placement="top-end"],
+    &[x-placement="bottom-start"],
+    &[x-placement="bottom-end"] {
+        .tippy-roundarrow,
+        .tippy-arrow {
+            @apply left-0 right-0 mx-auto;
+        }
+    }
+}
+
+.dark {
+    .tippy-box {
+        @apply bg-dark-1;
+        box-shadow: 0 0 20px 4px rgb(0 0 0 / 15%),
+            0 4px 80px -8px rgb(36 40 47 / 25%),
+            0 4px 4px -2px rgb(91 94 105 / 15%);
+        & > .tippy-svg-arrow {
+            fill: #2a3244;
+        }
+    }
+}

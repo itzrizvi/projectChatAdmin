@@ -1,0 +1,12 @@
+.chat-list {
+    .chat-list__notif {
+        width: 6px;
+        height: 6px;
+        margin-top: 35px;
+    }
+    &:hover {
+        .chat-list__action {
+            @apply opacity-100;
+        }
+    }
+}

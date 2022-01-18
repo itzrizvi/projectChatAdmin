@@ -1,0 +1,62 @@
+.newIntern-tag-1 {
+  margin: 0;
+  color: rgb(48, 71, 236);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+.newIntern-tag-2 {
+  font-size: 14px;
+  font-family: "Titillium Web";
+  color: rgb(115, 115, 118);
+}
+
+.chat-front-sec5 {
+  width: 91%;
+  margin: auto !important;
+  background-color: #ffffff;
+  padding: 12px 0px;
+  margin-bottom: 17px !important;
+  box-shadow: rgb(0 0 0 / 10%) 0px 4px 15px 0px,
+    rgb(0 0 0 / 10%) 0px 1px 2px 0px, rgb(48 71 236 / 50%) 0px 2px 0px 0px inset !important;
+}
+
+.blog-post-title h5 {
+  font-family: "Titillium Web";
+  font-weight: 600;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  padding-bottom: 12px;
+  padding-top: 17px;
+  cursor: pointer;
+}
+
+.blog-post-details {
+  border-bottom: 1px solid #e9e9e9;
+  padding: 12px 18px !important;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.custom-flex {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.blog-detail {
+  margin-left: 14px;
+}
+
+.blog-post-title {
+  padding: 0px 18px;
+}
+
+.blog-post-title {
+  padding: 0px 18px;
+  border-bottom: 1px solid #ebebebf1;
+}
+
+.blog-post-details:hover {
+  background-color: #e9e9e9de;
+}

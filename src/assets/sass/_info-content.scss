@@ -1,0 +1,5 @@
+.info-content {
+    @include media-breakpoint-down(xl) {
+        max-height: 95vh;
+    }
+}

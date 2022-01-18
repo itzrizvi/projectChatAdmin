@@ -1,0 +1,59 @@
+.accordion {
+    .accordion-item {
+        @apply py-4;
+        &:not(:last-child) {
+            @apply border-b border-gray-200;
+        }
+        &:first-child {
+            @apply -mt-4;
+        }
+        &:last-child {
+            @apply -mb-4;
+        }
+        .accordion-header .accordion-button {
+            @apply font-medium w-full text-left;
+            &:focus {
+                @apply outline-none;
+            }
+            &:not(.collapsed) {
+                @apply text-theme-1;
+            }
+        }
+    }
+    .accordion-collapse {
+        @apply mt-3 text-gray-700 leading-relaxed;
+        &.collapse:not(.show) {
+            @apply hidden;
+        }
+    }
+    &.accordion-boxed {
+        .accordion-item {
+            @apply p-4 border border-gray-200 mt-3;
+            &:first-child {
+                @apply mt-0;
+            }
+            &:last-child {
+                @apply mb-0;
+            }
+        }
+    }
+}
+
+.dark {
+    .accordion {
+        .accordion-item {
+            &:not(:last-child) {
+                @apply border-dark-5;
+            }
+            .accordion-header .accordion-button:not(.collapsed) {
+                @apply text-theme-10;
+            }
+        }
+        &.accordion-boxed .accordion-item {
+            @apply border-dark-5;
+        }
+        .accordion-collapse {
+            @apply text-gray-600;
+        }
+    }
+}

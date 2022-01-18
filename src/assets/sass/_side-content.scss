@@ -1,0 +1,9 @@
+.side-content {
+    @apply hidden;
+    @include media-breakpoint-down(xl) {
+        max-height: 95vh;
+    }
+    &.side-content--active {
+        @apply flex;
+    }
+}
