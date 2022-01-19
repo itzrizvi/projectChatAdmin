@@ -1,11 +1,14 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import "../../../assets/css/app.css";
+import useAuth from "../../../hooks/useAuth";
 import DHeader from "../DHeader/DHeader";
 import MainChat from "../MainChat/MainChat";
 import RightInfo from "../RightInfo/RightInfo";
 
 const Dashboard = () => {
+  const { userData } = useAuth();
+  console.log(userData);
   return (
     <>
       {/* Chat  Dashboard Header */}
