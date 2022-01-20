@@ -169,6 +169,8 @@ if (darkMode === undefined) {
     $("html").removeClass("dark");
   }
 }
+//  Set Localstorage first
+localStorage.setItem("darkmode", "false");
 const darkModeSwitch = (e) => {
   let darkMode = localStorage.getItem("darkmode");
   if (darkMode === "false") {

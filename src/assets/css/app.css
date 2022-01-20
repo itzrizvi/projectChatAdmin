@@ -972,6 +972,48 @@
   transition: 0.3s;
 }
 
+.chat-list.box:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(58, 141, 245, var(--tw-bg-opacity));
+  color: #ffffff;
+}
+
+.chat-list.box {
+  transition: 0.3s;
+}
+
+div#chatList {
+  position: relative;
+}
+
+div#chatList:focus::before {
+  position: absolute;
+  content: "";
+  --tw-bg-opacity: 1;
+  background-color: rgba(58, 141, 245, var(--tw-bg-opacity));
+  color: #ffffff;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 6px;
+}
+
+.chat-list__action.dropdown {
+  display: flex;
+  justify-content: end;
+}
+
+.chatlist-timestamp {
+  position: absolute;
+  right: 15px;
+}
+
+span#chatlistOp {
+  display: flex;
+  justify-content: end;
+}
+
 /**************** CSS BY RIZVI ENDS ***********************/
 
 .tippy-box[data-animation="fade"][data-state="hidden"] {

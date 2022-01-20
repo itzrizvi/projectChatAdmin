@@ -121,6 +121,7 @@ const MainChat = () => {
                         </div>
                       </div>
                     </div>
+
                     <div className="clear-both"></div>
                     <div className="chat-text-box__content flex items-center float-left">
                       <div className="box text-gray-700 dark:text-gray-300 flex flex-col sm:flex-row items-center mt-3 p-3">
