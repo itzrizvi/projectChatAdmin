@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ChevronDown, Copy, Share2 } from "react-feather";
+import { ChevronDown, Copy, Share2, Trash } from "react-feather";
 import useAuth from "../../../hooks/useAuth";
 import profileImgEx from "../../Image/messageImg.jpeg";
+
 
 const Conversation = ({ conversation, currentUser }) => {
   // Set logged in user conversation
@@ -87,6 +88,16 @@ const Conversation = ({ conversation, currentUser }) => {
     tConvert(gettingTime);
   }, [chatListSingle]);
 
+  // Chat Option Toggler
+  const triggerOption = (e) => {
+    let chatListOption = e.target.parentElement.nextElementSibling;
+    if (chatListOption) {
+      chatListOption.style.opacity = 1;
+      chatListOption.style.visibility = "visible";
+      chatListOption.style.top = "-54px";
+    }
+  }
+
   return (
     <>
       <div className="intro-x mb-4">
@@ -116,27 +127,17 @@ const Conversation = ({ conversation, currentUser }) => {
                 {timeStamp}
               </div>
               <div className="chat-list__action dropdown transition duration-200 opacity-0 mt-1 -mb-1 -mr-1 ml-auto">
-                <span className="dropdown-toggle block text-opacity-70">
+                <span className="dropdown-toggle block text-opacity-70 chatOptTrggr" onClick={triggerOption}>
                   {" "}
                   <ChevronDown className="w-6 h-6" strokeWidth="1" />{" "}
                 </span>
-                <div className="dropdown-menu w-40">
+                <div className="dropdown-menu w-40" id="chatlistOpt">
                   <div className="dropdown-menu__content box dark:bg-dark-1 p-2">
                     <span
                       href=""
                       className="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
                     >
-                      {" "}
-                      <Share2 className="w-4 h-4 mr-2" strokeWidth="1" /> Share
-                      Contact{" "}
-                    </span>
-                    <span
-                      href=""
-                      className="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                    >
-                      {" "}
-                      <Copy className="w-4 h-4 mr-2" strokeWidth="1" /> Copy
-                      Contact{" "}
+                      <Trash className="w-4 h-4 mr-2" strokeWidth="1" /> Delete
                     </span>
                   </div>
                 </div>

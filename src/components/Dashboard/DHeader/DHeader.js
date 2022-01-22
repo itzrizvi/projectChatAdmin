@@ -91,10 +91,6 @@ function show(dropdown) {
     // Set aria-expanded to true
     cash(dropdownToggle).attr("aria-expanded", true);
 
-    // Set dropdown width
-    // if (cash(dropdown).css("position") == "static")
-    //   cash(dropdown).css("position", "relative")("");
-
     cash(dropdownBox).css("width", cash(dropdownBox).css("width"));
 
     // Move dropdown element to body

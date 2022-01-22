@@ -999,9 +999,10 @@ div#chatList:focus::before {
   border-radius: 6px;
 }
 
-.chat-list__action.dropdown {
+.chat-list__action {
   display: flex;
   justify-content: end;
+  position: relative;
 }
 
 .chatlist-timestamp {
@@ -1009,9 +1010,19 @@ div#chatList:focus::before {
   right: 15px;
 }
 
-span#chatlistOp {
-  display: flex;
-  justify-content: end;
+textarea {
+  outline: none;
+  box-shadow: none !important;
+}
+
+#chatlistOpt {
+  transform: none;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: -38px;
+  left: -126px;
+  transition: .3s;
 }
 
 /**************** CSS BY RIZVI ENDS ***********************/
