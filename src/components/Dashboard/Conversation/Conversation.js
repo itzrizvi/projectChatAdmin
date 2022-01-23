@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ChevronDown, Copy, Share2, Trash } from "react-feather";
+import { ChevronDown, Trash } from "react-feather";
 import useAuth from "../../../hooks/useAuth";
 import profileImgEx from "../../Image/messageImg.jpeg";
-
 
 const Conversation = ({ conversation, currentUser }) => {
   // Set logged in user conversation
@@ -16,6 +15,8 @@ const Conversation = ({ conversation, currentUser }) => {
   const [timeStamp, setTimeStamp] = useState(null);
   // Use Credentials
   const { messages } = useAuth();
+  // Set Chat list option toggler
+  const [chatToggler, setChatToggler] = useState(0);
 
   // Fetching by  user  id
   useEffect(() => {
@@ -95,8 +96,16 @@ const Conversation = ({ conversation, currentUser }) => {
       chatListOption.style.opacity = 1;
       chatListOption.style.visibility = "visible";
       chatListOption.style.top = "-54px";
+      setChatToggler(chatToggler + 1);
+
+      if (chatToggler > 0) {
+        chatListOption.style.opacity = 0;
+        chatListOption.style.visibility = "hidden";
+        chatListOption.style.top = "-3px";
+        setChatToggler(0);
+      }
     }
-  }
+  };
 
   return (
     <>
@@ -127,7 +136,10 @@ const Conversation = ({ conversation, currentUser }) => {
                 {timeStamp}
               </div>
               <div className="chat-list__action dropdown transition duration-200 opacity-0 mt-1 -mb-1 -mr-1 ml-auto">
-                <span className="dropdown-toggle block text-opacity-70 chatOptTrggr" onClick={triggerOption}>
+                <span
+                  className="dropdown-toggle block text-opacity-70 chatOptTrggr"
+                  onClick={triggerOption}
+                >
                   {" "}
                   <ChevronDown className="w-6 h-6" strokeWidth="1" />{" "}
                 </span>
