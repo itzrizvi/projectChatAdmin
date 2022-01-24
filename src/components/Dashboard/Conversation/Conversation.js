@@ -65,11 +65,14 @@ const Conversation = ({ conversation, currentUser }) => {
       }
     };
     getChatSingle();
-  }, [chatListMsg?.data[0]]);
+  }, [chatListMsg?.data[0], chatListSingle]);
 
   // Setup the time  stamp
+  //.data?.slice(-1).pop()?
   useEffect(() => {
-    const created_at = new Date(chatListSingle?.data[0]?.createdAt);
+    const created_at = new Date(
+      chatListSingle?.data?.slice(-1).pop()?.createdAt
+    );
     const gettingTime = created_at.getHours() + ":" + created_at.getMinutes();
 
     function tConvert(time) {
@@ -128,7 +131,7 @@ const Conversation = ({ conversation, currentUser }) => {
                 {user?.data.firstName} {user?.data.lastName}
               </span>
               <div className="text-opacity-80 w-4/5 truncate mt-0.5">
-                {chatListSingle?.data[0]?.text}
+                {chatListSingle?.data?.slice(-1).pop()?.text}
               </div>
             </div>
             <div className="chatlist-timestamp">

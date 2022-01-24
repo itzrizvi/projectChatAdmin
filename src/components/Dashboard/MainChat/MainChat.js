@@ -21,10 +21,6 @@ import foodImage from "../../Image/preview-4.jpg";
 const MainChat = () => {
   const { currentChat, messages, conversations, userData } = useAuth();
 
-  console.log(currentChat?.members);
-  console.log(messages.data);
-  console.log(conversations);
-
   // Selected User State
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -47,6 +43,14 @@ const MainChat = () => {
       getSelectedUser();
     }
   }, [userData, currentChat]);
+
+  const filterUserMessages = messages?.data?.filter(
+    (matchUser) => matchUser.sender === userData.data._id
+  );
+
+  const filterOtherMessage = messages?.data?.filter(
+    (matchOther) => matchOther.sender !== userData.data._id
+  );
 
   return (
     <>
@@ -82,8 +86,10 @@ const MainChat = () => {
               </span>
             </div>
             {/* <!-- END: Chat Box Top Bar --> */}
+
             {/* <!-- BEGIN: Chat Box Content --> */}
             <div className="overflow-y-scroll scrollbar-hidden pt-5 flex-1">
+              {/* ******************************************************** */}
               {/* <!-- BEGIN: Chat Text --> */}
               <div className="-intro-x chat-text-box flex items-end float-left mb-4">
                 <div className="chat-text-box__photo w-10 h-10 hidden sm:block flex-none image-fit relative mr-4">
@@ -188,10 +194,9 @@ const MainChat = () => {
                   <div className="text-gray-600 text-xs">2 mins ago</div>
                 </div>
               </div>
+
               {/* <!-- END: Chat Text --> */}
               <div className="clear-both"></div>
-
-              {/* <!-- BEGIN: Chat Text --> */}
               <div className="intro-x chat-text-box flex items-end float-right mb-4">
                 <div className="w-full text-right">
                   <div>
@@ -288,6 +293,7 @@ const MainChat = () => {
                   />
                 </div>
               </div>
+              {/* ******************************************************** */}
               {/* <!-- END: Chat Text --> */}
               <div className="clear-both"></div>
 
@@ -320,8 +326,12 @@ const MainChat = () => {
                 </div>
               </div>
               {/* <!-- END: Chat Text --> */}
+
+              {/* ******************************************************** */}
+              {/* <!-- BEGIN: Chat Text --> */}
             </div>
             {/* <!-- END: Chat Box Content --> */}
+
             {/* <!-- BEGIN: Chat Box Input --> */}
             <div className="intro-y chat-input box border-theme-3 dark:bg-dark-2 dark:border-dark-2 border flex items-center px-5 py-4">
               {/* <!-- BEGIN: Chat Input Dropdown --> */}
