@@ -1,22 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  Camera,
-  CornerUpLeft,
-  Download,
-  Mail,
-  Mic,
-  MoreHorizontal,
-  MoreVertical,
-  Plus,
-  Send,
-  Share,
-  Smile,
-  Trash,
-} from "react-feather";
+import { Camera, Mail, Mic, Plus, Send, Smile } from "react-feather";
 import useAuth from "../../../hooks/useAuth";
 import profileImgEx from "../../Image/messageImg.jpeg";
-import foodImage from "../../Image/preview-4.jpg";
 
 const MainChat = () => {
   const { currentChat, messages, conversations, userData } = useAuth();
@@ -48,9 +34,12 @@ const MainChat = () => {
     (matchUser) => matchUser.sender === userData.data._id
   );
 
-  const filterOtherMessage = messages?.data?.filter(
+  const filterOtherMessages = messages?.data?.filter(
     (matchOther) => matchOther.sender !== userData.data._id
   );
+
+  console.log(filterUserMessages);
+  console.log(filterOtherMessages);
 
   return (
     <>
@@ -101,13 +90,13 @@ const MainChat = () => {
                 </div>
                 <div className="w-full text-left">
                   <div>
-                    <div className="chat-text-box__content flex items-center float-left">
-                      <div className="box leading-relaxed dark:text-gray-300 text-gray-700 px-4 py-3 mt-3">
-                        Lorem ipsum sit
-                        <span className="text-theme-1">@edwardnorton</span> amen
-                        dolor, lorem ipsum sit amen dolor
-                      </div>
-                      <div className="hidden sm:block dropdown relative ml-3 mt-3">
+                    <div className="chat-text-box__content items-center float-left">
+                      {filterOtherMessages.map((singleMsg) => (
+                        <div className="box leading-relaxed dark:text-gray-300 text-gray-700 px-4 py-3 mt-3">
+                          {singleMsg?.text}
+                        </div>
+                      ))}
+                      {/* <div className="hidden sm:block dropdown relative ml-3 mt-3">
                         <span className="dropdown-toggle w-4 h-4">
                           <MoreVertical className="w-4 h-4" />
                         </span>
@@ -121,10 +110,10 @@ const MainChat = () => {
                             </span>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
 
-                    <div className="clear-both"></div>
+                    {/* <div className="clear-both"></div>
                     <div className="chat-text-box__content flex items-center float-left">
                       <div className="box text-gray-700 dark:text-gray-300 flex flex-col sm:flex-row items-center mt-3 p-3">
                         <div className="chat-text-box__content__icon text-white w-12 flex-none bg-contain relative bg-no-repeat bg-center block">
@@ -188,10 +177,10 @@ const MainChat = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="clear-both mb-2"></div>
-                  <div className="text-gray-600 text-xs">2 mins ago</div>
+                  {/* <div className="text-gray-600 text-xs">2 mins ago</div> */}
                 </div>
               </div>
 
@@ -200,8 +189,8 @@ const MainChat = () => {
               <div className="intro-x chat-text-box flex items-end float-right mb-4">
                 <div className="w-full text-right">
                   <div>
-                    <div className="chat-text-box__content flex items-center float-right">
-                      <div className="hidden sm:block dropdown relative mr-3 mt-3">
+                    <div className="chat-text-box__content items-center float-right">
+                      {/* <div className="hidden sm:block dropdown relative mr-3 mt-3">
                         <span className="dropdown-toggle w-4 h-4">
                           <MoreVertical className="w-4 h-4" />
                         </span>
@@ -217,16 +206,15 @@ const MainChat = () => {
                             </span>
                           </div>
                         </div>
-                      </div>
-                      <div className="box leading-relaxed bg-theme-1 text-opacity-80 text-white px-4 py-3 mt-3">
-                        {" "}
-                        Lorem ipsum sit{" "}
-                        <span className="text-white">@morganfreeman</span> amen
-                        dolor, lorem ipsum sit amen dolor{" "}
-                      </div>
+                      </div> */}
+                      {filterUserMessages.map((singleUserMsg) => (
+                        <div className="box leading-relaxed bg-theme-1 text-opacity-80 text-white px-4 py-3 mt-3">
+                          {singleUserMsg?.text}
+                        </div>
+                      ))}
                     </div>
                     <div className="clear-both"></div>
-                    <div className="chat-text-box__content flex items-center float-right">
+                    {/* <div className="chat-text-box__content flex items-center float-right">
                       <div className="hidden sm:block dropdown relative mr-3 mt-3">
                         <span className="dropdown-toggle w-4 h-4">
                           <MoreVertical className="w-4 h-4" />
@@ -278,7 +266,7 @@ const MainChat = () => {
                           />
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="clear-both mb-2"></div>
                   <div className="text-gray-600 text-xs text-right">
