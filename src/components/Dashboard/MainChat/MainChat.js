@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Camera, Mail, Mic, Plus, Send, Smile } from "react-feather";
+import { format } from "timeago.js";
 import useAuth from "../../../hooks/useAuth";
 import profileImgEx from "../../Image/messageImg.jpeg";
 
@@ -9,6 +10,13 @@ const MainChat = () => {
 
   // Selected User State
   const [selectedUser, setSelectedUser] = useState(null);
+
+  //  Reversing messages for sorting
+  let messageSorted = messages?.data?.reverse();
+
+  // Getting the present msg sending time
+  const getInstantMSGTime = new Date(Date.now());
+  const createdAt = getInstantMSGTime.toString();
 
   // Finding Selected User details
   useEffect(() => {
@@ -29,17 +37,6 @@ const MainChat = () => {
       getSelectedUser();
     }
   }, [userData, currentChat]);
-
-  const filterUserMessages = messages?.data?.filter(
-    (matchUser) => matchUser.sender === userData.data._id
-  );
-
-  const filterOtherMessages = messages?.data?.filter(
-    (matchOther) => matchOther.sender !== userData.data._id
-  );
-
-  console.log(filterUserMessages);
-  console.log(filterOtherMessages);
 
   return (
     <>
@@ -80,209 +77,37 @@ const MainChat = () => {
             <div className="overflow-y-scroll scrollbar-hidden pt-5 flex-1">
               {/* ******************************************************** */}
               {/* <!-- BEGIN: Chat Text --> */}
-              <div className="-intro-x chat-text-box flex items-end float-left mb-4">
-                <div className="chat-text-box__photo w-10 h-10 hidden sm:block flex-none image-fit relative mr-4">
-                  <img
-                    alt="Topson Messenger Tailwind HTML Admin Template"
-                    className="rounded-full"
-                    src={profileImgEx}
-                  />
-                </div>
-                <div className="w-full text-left">
-                  <div>
-                    <div className="chat-text-box__content items-center float-left">
-                      {filterOtherMessages.map((singleMsg) => (
-                        <div className="box leading-relaxed dark:text-gray-300 text-gray-700 px-4 py-3 mt-3">
-                          {singleMsg?.text}
-                        </div>
-                      ))}
-                      {/* <div className="hidden sm:block dropdown relative ml-3 mt-3">
-                        <span className="dropdown-toggle w-4 h-4">
-                          <MoreVertical className="w-4 h-4" />
-                        </span>
-                        <div className="dropdown-menu w-40">
-                          <div className="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <span className="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                              <CornerUpLeft className="w-4 h-4 mr-2" /> Reply
-                            </span>
-                            <span className="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                              <Trash className="w-4 h-4 mr-2" /> Delete
-                            </span>
-                          </div>
-                        </div>
-                      </div> */}
-                    </div>
-
-                    {/* <div className="clear-both"></div>
-                    <div className="chat-text-box__content flex items-center float-left">
-                      <div className="box text-gray-700 dark:text-gray-300 flex flex-col sm:flex-row items-center mt-3 p-3">
-                        <div className="chat-text-box__content__icon text-white w-12 flex-none bg-contain relative bg-no-repeat bg-center block">
-                          <div className="absolute m-auto top-0 left-0 right-0 bottom-0 flex items-center justify-center">
-                            JPG
-                          </div>
-                        </div>
-                        <div className="sm:ml-3 mt-3 sm:mt-0 text-center sm:text-left">
-                          <div className="text-gray-700 dark:text-gray-300 whitespace-nowrap font-medium">
-                            preview-8.jpg
-                          </div>
-                          <div className="text-gray-600 whitespace-nowrap text-xs mt-0.5">
-                            1.2 MB Image File
-                          </div>
-                        </div>
-                        <div className="sm:ml-20 mt-3 sm:mt-0 flex">
-                          <span
-                            title="Download"
-                            className="tooltip w-8 h-8 block border rounded-full flex-none flex items-center justify-center sm:ml-2"
-                          >
-                            {" "}
-                            <Download className="w-4 h-4" />{" "}
-                          </span>
-                          <span
-                            title="Share"
-                            className="tooltip w-8 h-8 block border rounded-full flex-none flex items-center justify-center ml-2"
-                          >
-                            {" "}
-                            <Share className="w-4 h-4" />{" "}
-                          </span>
-                          <span
-                            title="Permission"
-                            className="tooltip w-8 h-8 block border rounded-full flex-none flex items-center justify-center ml-2"
-                          >
-                            {" "}
-                            <MoreHorizontal className="w-4 h-4" />{" "}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="hidden sm:block dropdown relative ml-3 mt-3">
-                        <span className="dropdown-toggle w-4 h-4">
-                          {" "}
-                          <MoreVertical className="w-4 h-4" />{" "}
-                        </span>
-                        <div className="dropdown-menu w-40">
-                          <div className="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <span
-                              href=""
-                              className="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                            >
-                              {" "}
-                              <CornerUpLeft className="w-4 h-4 mr-2" /> Reply{" "}
-                            </span>
-                            <span
-                              href=""
-                              className="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                            >
-                              {" "}
-                              <Trash className="w-4 h-4 mr-2" /> Delete{" "}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
+              <ul>
+                {messageSorted?.map((message) => (
+                  <li
+                    className={
+                      message?.sender !== userData?.data._id
+                        ? "chat-text-box__content items-center left-side-chat"
+                        : "chat-text-box__content items-center right-side-chat"
+                    }
+                  >
+                    {/* <div className="w-10 h-10 hidden sm:block flex-none image-fit relative mr-5">
+                      <img
+                        alt="Topson Messenger Tailwind HTML Admin Template"
+                        className="rounded-full"
+                        src={profileImgEx}
+                      />
                     </div> */}
-                  </div>
-                  <div className="clear-both mb-2"></div>
-                  {/* <div className="text-gray-600 text-xs">2 mins ago</div> */}
-                </div>
-              </div>
+                    <div className="message-text">{message.text}</div>
+                    <span
+                      className={
+                        message?.sender !== userData?.data._id
+                          ? "admin-msg-time-left"
+                          : "admin-msg-time-right"
+                      }
+                    >
+                      {format(createdAt)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              {/* <!-- END: Chat Text --> */}
 
-              {/* <!-- END: Chat Text --> */}
-              <div className="clear-both"></div>
-              <div className="intro-x chat-text-box flex items-end float-right mb-4">
-                <div className="w-full text-right">
-                  <div>
-                    <div className="chat-text-box__content items-center float-right">
-                      {/* <div className="hidden sm:block dropdown relative mr-3 mt-3">
-                        <span className="dropdown-toggle w-4 h-4">
-                          <MoreVertical className="w-4 h-4" />
-                        </span>
-                        <div className="dropdown-menu w-40">
-                          <div className="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <span className="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                              {" "}
-                              <CornerUpLeft className="w-4 h-4 mr-2" /> Reply
-                            </span>
-                            <span className="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                              {" "}
-                              <Trash className="w-4 h-4 mr-2" /> Delete{" "}
-                            </span>
-                          </div>
-                        </div>
-                      </div> */}
-                      {filterUserMessages.map((singleUserMsg) => (
-                        <div className="box leading-relaxed bg-theme-1 text-opacity-80 text-white px-4 py-3 mt-3">
-                          {singleUserMsg?.text}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="clear-both"></div>
-                    {/* <div className="chat-text-box__content flex items-center float-right">
-                      <div className="hidden sm:block dropdown relative mr-3 mt-3">
-                        <span className="dropdown-toggle w-4 h-4">
-                          <MoreVertical className="w-4 h-4" />
-                        </span>
-                        <div className="dropdown-menu w-40">
-                          <div className="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <span className="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                              {" "}
-                              <CornerUpLeft className="w-4 h-4 mr-2" />
-                              Reply
-                            </span>
-                            <span className="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                              {" "}
-                              <Trash className="w-4 h-4 mr-2" />
-                              Delete{" "}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="rounded-md text-gray-700 chat-text-box__content__text--image flex justify-end mt-3">
-                        <div
-                          className="tooltip w-16 h-16 image-fit zoom-in"
-                          title="FOOD 1"
-                        >
-                          <img
-                            alt="Topson Messenger Tailwind HTML Admin Template"
-                            className="rounded-md"
-                            src={foodImage}
-                          />
-                        </div>
-                        <div
-                          className="tooltip w-16 h-16 image-fit ml-2 zoom-in"
-                          title="FOOD 2"
-                        >
-                          <img
-                            alt="Topson Messenger Tailwind HTML Admin Template"
-                            className="rounded-md"
-                            src={foodImage}
-                          />
-                        </div>
-                        <div
-                          className="tooltip w-16 h-16 image-fit ml-2 zoom-in"
-                          title="FOOD 3"
-                        >
-                          <img
-                            alt="Topson Messenger Tailwind HTML Admin Template"
-                            className="rounded-md"
-                            src={foodImage}
-                          />
-                        </div>
-                      </div>
-                    </div> */}
-                  </div>
-                  <div className="clear-both mb-2"></div>
-                  <div className="text-gray-600 text-xs text-right">
-                    1 mins ago
-                  </div>
-                </div>
-                <div className="chat-text-box__photo w-10 h-10 hidden sm:block flex-none image-fit relative ml-4">
-                  <img
-                    alt="Topson Messenger Tailwind HTML Admin Template"
-                    className="rounded-full"
-                    src={profileImgEx}
-                  />
-                </div>
-              </div>
-              {/* ******************************************************** */}
-              {/* <!-- END: Chat Text --> */}
               <div className="clear-both"></div>
 
               <div className="intro-y text-gray-500 text-xs text-center mb-6 mt-5">

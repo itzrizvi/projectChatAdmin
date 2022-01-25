@@ -67,8 +67,7 @@ const Conversation = ({ conversation, currentUser }) => {
     getChatSingle();
   }, [chatListMsg?.data[0], chatListSingle]);
 
-  // Setup the time  stamp
-  //.data?.slice(-1).pop()?
+  // Setup the time stamp
   useEffect(() => {
     const created_at = new Date(
       chatListSingle?.data?.slice(-1).pop()?.createdAt
