@@ -82,6 +82,7 @@ const useCredentials = () => {
     setCurrentChat,
     currentChat,
     messages,
+    setMessages,
   };
 };
 

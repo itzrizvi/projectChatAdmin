@@ -6,17 +6,20 @@ import useAuth from "../../../hooks/useAuth";
 import profileImgEx from "../../Image/messageImg.jpeg";
 
 const MainChat = () => {
-  const { currentChat, messages, conversations, userData } = useAuth();
+  const { currentChat, messages, conversations, userData, setMessages } =
+    useAuth();
 
   // Selected User State
   const [selectedUser, setSelectedUser] = useState(null);
+  // New Message from admin
+  const [newMessage, setNewMessage] = useState("");
+
+  // Instant Message
+  const [instantMSG, setInstantMSG] = useState([]);
 
   //  Reversing messages for sorting
   let messageSorted = messages?.data?.reverse();
-
-  // Getting the present msg sending time
-  const getInstantMSGTime = new Date(Date.now());
-  const createdAt = getInstantMSGTime.toString();
+  let instantMsgSorted = instantMSG?.reverse();
 
   // Finding Selected User details
   useEffect(() => {
@@ -38,6 +41,37 @@ const MainChat = () => {
     }
   }, [userData, currentChat]);
 
+  //
+  const handleAdminMsgSubmit = async (e) => {
+    e.preventDefault();
+    const message = {
+      sender: userData.data._id,
+      text: newMessage,
+      conversationId: currentChat._id,
+    };
+    setInstantMSG([...instantMSG, message]);
+
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/messages/",
+        message
+      );
+
+      setMessages([...messages, res]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Enter button press send msg function
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleAdminMsgSubmit(e);
+    }
+  };
+
+  console.log(instantMSG);
   return (
     <>
       <div className="chat-box border-theme-5 col-span-12 xl:col-span-6 flex flex-col overflow-hidden xl:border-l xl:border-r p-6">
@@ -76,7 +110,7 @@ const MainChat = () => {
             {/* <!-- BEGIN: Chat Box Content --> */}
             <div className="overflow-y-scroll scrollbar-hidden pt-5 flex-1">
               {/* ******************************************************** */}
-              {/* <!-- BEGIN: Chat Text --> */}
+              {/* <!-- BEGIN: Previous Chat Text --> */}
               <ul>
                 {messageSorted?.map((message) => (
                   <li
@@ -101,12 +135,47 @@ const MainChat = () => {
                           : "admin-msg-time-right"
                       }
                     >
-                      {format(createdAt)}
+                      {format(message?.createdAt)}
                     </span>
                   </li>
                 ))}
               </ul>
-              {/* <!-- END: Chat Text --> */}
+              {/* <!-- END: Previous Chat Text --> */}
+
+              {/* <!-- Start: Instant Chat Text --> */}
+              {instantMsgSorted ? (
+                <ul>
+                  {instantMsgSorted?.map((message) => (
+                    <li
+                      className={
+                        message?.sender !== userData?.data._id
+                          ? "chat-text-box__content items-center left-side-chat"
+                          : "chat-text-box__content items-center right-side-chat"
+                      }
+                    >
+                      {/* <div className="w-10 h-10 hidden sm:block flex-none image-fit relative mr-5">
+                      <img
+                        alt="Topson Messenger Tailwind HTML Admin Template"
+                        className="rounded-full"
+                        src={profileImgEx}
+                      />
+                    </div> */}
+                      <div className="message-text">{message.text}</div>
+                      <span
+                        className={
+                          message?.sender !== userData?.data._id
+                            ? "admin-msg-time-left"
+                            : "admin-msg-time-right"
+                        }
+                      >
+                        {format(message?.createdAt)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+
+              {/* <!-- END: Instant Chat Text --> */}
 
               <div className="clear-both"></div>
 
@@ -146,53 +215,63 @@ const MainChat = () => {
             {/* <!-- END: Chat Box Content --> */}
 
             {/* <!-- BEGIN: Chat Box Input --> */}
-            <div className="intro-y chat-input box border-theme-3 dark:bg-dark-2 dark:border-dark-2 border flex items-center px-5 py-4">
-              {/* <!-- BEGIN: Chat Input Dropdown --> */}
-              <div className="dropdown relative" data-placement="top">
-                <span className="text-gray-600 hover:text-theme-1 dropdown-toggle">
-                  {" "}
-                  <Plus className="w-5 h-5 sm:w-6 sm:h-6 opacity-50" />
-                </span>
-                <div className="chat-input__dropdown dropdown-menu">
-                  <div className="dropdown-menu__content p-2">
-                    <span className="input-box-icon shadow-md text-gray-600 bg-white rounded-full dark:text-gray-300 dark:bg-dark-3 hover:bg-theme-1 hover:text-white dark:hover:bg-theme-1 flex items-center block p-3 transition duration-300 rounded-md mb-2">
-                      {" "}
-                      <Camera className="w-5 h-5 opacity-50" />
-                    </span>
-                    <span className="input-box-icon shadow-md text-gray-600 bg-white rounded-full dark:text-gray-300 dark:bg-dark-3 hover:bg-theme-1 hover:text-white dark:hover:bg-theme-1 flex items-center block p-3 transition duration-300 rounded-md mb-2">
-                      {" "}
-                      <Mic className="w-5 h-5 opacity-50" />
-                      <i data-feather="mic" className="w-5 h-5"></i>{" "}
-                    </span>
-                    <span className="input-box-icon shadow-md text-gray-600 bg-white rounded-full dark:text-gray-300 dark:bg-dark-3 hover:bg-theme-1 hover:text-white dark:hover:bg-theme-1 flex items-center block p-3 transition duration-300 rounded-md mb-2">
-                      {" "}
-                      <Mail className="w-5 h-5 opacity-50" />
-                    </span>
+            <form className="admin-message-form">
+              <div className="intro-y chat-input box border-theme-3 dark:bg-dark-2 dark:border-dark-2 border flex items-center px-5 py-4">
+                {/* <!-- BEGIN: Chat Input Dropdown --> */}
+                <div className="dropdown relative" data-placement="top">
+                  <span className="text-gray-600 hover:text-theme-1 dropdown-toggle">
+                    {" "}
+                    <Plus className="w-5 h-5 sm:w-6 sm:h-6 opacity-50" />
+                  </span>
+                  <div className="chat-input__dropdown dropdown-menu">
+                    <div className="dropdown-menu__content p-2">
+                      <span className="input-box-icon shadow-md text-gray-600 bg-white rounded-full dark:text-gray-300 dark:bg-dark-3 hover:bg-theme-1 hover:text-white dark:hover:bg-theme-1 flex items-center block p-3 transition duration-300 rounded-md mb-2">
+                        {" "}
+                        <Camera className="w-5 h-5 opacity-50" />
+                      </span>
+                      <span className="input-box-icon shadow-md text-gray-600 bg-white rounded-full dark:text-gray-300 dark:bg-dark-3 hover:bg-theme-1 hover:text-white dark:hover:bg-theme-1 flex items-center block p-3 transition duration-300 rounded-md mb-2">
+                        {" "}
+                        <Mic className="w-5 h-5 opacity-50" />
+                        <i data-feather="mic" className="w-5 h-5"></i>{" "}
+                      </span>
+                      <span className="input-box-icon shadow-md text-gray-600 bg-white rounded-full dark:text-gray-300 dark:bg-dark-3 hover:bg-theme-1 hover:text-white dark:hover:bg-theme-1 flex items-center block p-3 transition duration-300 rounded-md mb-2">
+                        {" "}
+                        <Mail className="w-5 h-5 opacity-50" />
+                      </span>
+                    </div>
                   </div>
                 </div>
+                {/* <!-- END: Chat Input Dropdown --> */}
+                <textarea
+                  className="form-control h-12 shadow-none resize-none border-transparent px-5 py-3 focus:shadow-none truncate mr-3 sm:mr-0"
+                  rows="1"
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  value={newMessage}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Type your message..."
+                ></textarea>
+                {/* <!-- BEGIN: Chat Smiley Dropdown --> */}
+                <div
+                  className="dropdown relative mr-3 sm:mr-5"
+                  data-placement="top-end"
+                >
+                  <span className="text-gray-600 hover:text-theme-1 dropdown-toggle w-4 h-4 sm:w-5 sm:h-5 block">
+                    {" "}
+                    <Smile className="w-full h-full opacity-50" />
+                  </span>
+                </div>
+                {/* <!-- END: Chat Smiley Dropdown --> */}
+                <button
+                  type="submit"
+                  className="admin-message-submit"
+                  onClick={handleAdminMsgSubmit}
+                >
+                  <span className="bg-theme-1 text-white w-8 h-8 sm:w-10 sm:h-10 block rounded-full flex-none flex items-center justify-center">
+                    <Send className="-4 h-4 sm:w-5 sm:h-5" />
+                  </span>
+                </button>
               </div>
-              {/* <!-- END: Chat Input Dropdown --> */}
-              <textarea
-                className="form-control h-12 shadow-none resize-none border-transparent px-5 py-3 focus:shadow-none truncate mr-3 sm:mr-0"
-                rows="1"
-                placeholder="Type your message..."
-              ></textarea>
-              {/* <!-- BEGIN: Chat Smiley Dropdown --> */}
-              <div
-                className="dropdown relative mr-3 sm:mr-5"
-                data-placement="top-end"
-              >
-                <span className="text-gray-600 hover:text-theme-1 dropdown-toggle w-4 h-4 sm:w-5 sm:h-5 block">
-                  {" "}
-                  <Smile className="w-full h-full opacity-50" />
-                </span>
-              </div>
-              {/* <!-- END: Chat Smiley Dropdown --> */}
-              <span className="bg-theme-1 text-white w-8 h-8 sm:w-10 sm:h-10 block rounded-full flex-none flex items-center justify-center">
-                {" "}
-                <Send className="-4 h-4 sm:w-5 sm:h-5" />
-              </span>
-            </div>
+            </form>
           </>
         ) : (
           <span className="openConversation">Open A Conversation</span>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { ChevronDown, Trash } from "react-feather";
+import { format } from "timeago.js";
 import useAuth from "../../../hooks/useAuth";
 import profileImgEx from "../../Image/messageImg.jpeg";
 
@@ -135,7 +136,7 @@ const Conversation = ({ conversation, currentUser }) => {
             </div>
             <div className="chatlist-timestamp">
               <div className="whitespace-nowrap text-opacity-80 text-xs">
-                {timeStamp}
+                {format(chatListSingle?.data?.slice(-1).pop()?.createdAt)}
               </div>
               <div className="chat-list__action dropdown transition duration-200 opacity-0 mt-1 -mb-1 -mr-1 ml-auto">
                 <span
