@@ -72,6 +72,7 @@ const MainChat = () => {
   };
 
   console.log(instantMSG);
+  console.log(currentChat?._id);
   return (
     <>
       <div className="chat-box border-theme-5 col-span-12 xl:col-span-6 flex flex-col overflow-hidden xl:border-l xl:border-r p-6">
@@ -146,31 +147,35 @@ const MainChat = () => {
               {instantMsgSorted ? (
                 <ul>
                   {instantMsgSorted?.map((message) => (
-                    <li
-                      className={
-                        message?.sender !== userData?.data._id
-                          ? "chat-text-box__content items-center left-side-chat"
-                          : "chat-text-box__content items-center right-side-chat"
-                      }
-                    >
-                      {/* <div className="w-10 h-10 hidden sm:block flex-none image-fit relative mr-5">
+                    <>
+                      {currentChat?._id === message.conversationId ? (
+                        <li
+                          className={
+                            message?.sender !== userData?.data._id
+                              ? "chat-text-box__content items-center left-side-chat"
+                              : "chat-text-box__content items-center right-side-chat"
+                          }
+                        >
+                          {/* <div className="w-10 h-10 hidden sm:block flex-none image-fit relative mr-5">
                       <img
                         alt="Topson Messenger Tailwind HTML Admin Template"
                         className="rounded-full"
                         src={profileImgEx}
                       />
                     </div> */}
-                      <div className="message-text">{message.text}</div>
-                      <span
-                        className={
-                          message?.sender !== userData?.data._id
-                            ? "admin-msg-time-left"
-                            : "admin-msg-time-right"
-                        }
-                      >
-                        {format(message?.createdAt)}
-                      </span>
-                    </li>
+                          <div className="message-text">{message.text}</div>
+                          <span
+                            className={
+                              message?.sender !== userData?.data._id
+                                ? "admin-msg-time-left"
+                                : "admin-msg-time-right"
+                            }
+                          >
+                            {format(message?.createdAt)}
+                          </span>
+                        </li>
+                      ) : null}
+                    </>
                   ))}
                 </ul>
               ) : null}
