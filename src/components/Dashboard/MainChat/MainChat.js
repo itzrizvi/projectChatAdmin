@@ -59,7 +59,6 @@ const MainChat = () => {
         "http://localhost:5000/api/messages/",
         message
       );
-
       setMessages([...messages, res]);
     } catch (error) {
       console.log(error);
@@ -81,8 +80,6 @@ const MainChat = () => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, newMessage]);
 
-  console.log(instantMSG);
-  console.log(currentChat?._id);
   return (
     <>
       <div className="chat-box border-theme-5 col-span-12 xl:col-span-6 flex flex-col overflow-hidden xl:border-l xl:border-r p-6">

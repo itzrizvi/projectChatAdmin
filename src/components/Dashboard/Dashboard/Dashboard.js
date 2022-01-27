@@ -8,7 +8,6 @@ import RightInfo from "../RightInfo/RightInfo";
 
 const Dashboard = () => {
   const { userData } = useAuth();
-  console.log(userData);
   return (
     <>
       {/* Chat  Dashboard Header */}
