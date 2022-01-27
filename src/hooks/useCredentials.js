@@ -73,7 +73,7 @@ const useCredentials = () => {
       }
     };
     getMessages();
-  }, [currentChat]);
+  }, [currentChat?._id]);
 
   return {
     token,

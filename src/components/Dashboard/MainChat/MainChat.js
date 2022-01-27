@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Camera, Mail, Mic, Plus, Send, Smile } from "react-feather";
 import { format } from "timeago.js";
 import useAuth from "../../../hooks/useAuth";
@@ -16,6 +16,9 @@ const MainChat = () => {
 
   // Instant Message
   const [instantMSG, setInstantMSG] = useState([]);
+
+  //
+  const scrollRef = useRef();
 
   //  Reversing messages for sorting
   let messageSorted = messages?.data?.reverse();
@@ -61,6 +64,7 @@ const MainChat = () => {
     } catch (error) {
       console.log(error);
     }
+    e.target.value = "";
   };
 
   // Enter button press send msg function
@@ -68,8 +72,14 @@ const MainChat = () => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleAdminMsgSubmit(e);
+      e.target.value = "";
     }
   };
+
+  //
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, newMessage]);
 
   console.log(instantMSG);
   console.log(currentChat?._id);
@@ -115,6 +125,7 @@ const MainChat = () => {
               <ul>
                 {messageSorted?.map((message) => (
                   <li
+                    ref={scrollRef}
                     className={
                       message?.sender !== userData?.data._id
                         ? "chat-text-box__content items-center left-side-chat"
@@ -144,12 +155,13 @@ const MainChat = () => {
               {/* <!-- END: Previous Chat Text --> */}
 
               {/* <!-- Start: Instant Chat Text --> */}
-              {instantMsgSorted ? (
+              {instantMSG ? (
                 <ul>
                   {instantMsgSorted?.map((message) => (
                     <>
                       {currentChat?._id === message.conversationId ? (
                         <li
+                          ref={scrollRef}
                           className={
                             message?.sender !== userData?.data._id
                               ? "chat-text-box__content items-center left-side-chat"
