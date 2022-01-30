@@ -63,7 +63,6 @@ const MessageDetails = ({ pageChange, presentPage }) => {
 
   // Creating user function
   const onCreateUser = () => {
-    console.log(userName);
     setCheckAdmin(userName);
     socket.emit("new_user", userName);
     const confAvatar = Math.floor(Math.random() * 2) + ".png";
